@@ -187,3 +187,20 @@ canvas{
     color: rgb(179, 192, 199);
     border:1px solid rgb(179, 192, 199);
 }
+
+#div1 {
+    position: relative;
+    width: 95%;
+    height: 95%;
+    margin: auto;
+  }
+   
+  #div1 a {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    color: #0b85ff;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 3px 6px;
+  }
