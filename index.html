@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Tianyou Cheng</title>
+    <script type="text/javascript">
+    var count=2;
+    var xnum_arr=[];
+    var ynum_arr=[];
+    var resu=0;
+        function addline(){
+            var txtin1=document.createElement('input');
+            var txtin2=document.createElement('input');
+            var btons1=document.getElementById('xcoor');
+            var btons2=document.getElementById('ycoor');
+            txtin1.type=Text;txtin2.type=Text;
+            var tem1="xt"+count;var tem2="yt"+count;
+            var tempt1="phone"+count;var tempt2="tap"+count;
+            count++;
+            txtin1.id=tem1;txtin2.id=tem2;
+            txtin1.name=tempt1;txtin2.name=tempt2;
+            btons1.appendChild(txtin1);btons2.appendChild(txtin2);
+            var div1=document.getElementById('parture');
+            div1.style.height=div1.offsetHeight+20+"px";
+        }
+        function showresult(){
+            var div1=document.getElementById('parture').style.height=250+"px";
+            var pres=document.createElement('p');
+            pres.innerHTML=resu;
+            document.getElementById('parture').appendChild(pres);
+            var can=document.createElement('canvas');
+            can.id="drawing1";
+            can.height=198;
+            can.width=398;
+            can.style.border=0;
+            document.getElementById('parture').appendChild(can);
+            
+            var drawing=document.getElementById('drawing1');
+            var content1=drawing.getContext('2d');
+            content1.beginPath();
+            content1.lineWidth="1";
+            content1.strokeStyle="black";
+            content1.moveTo(xnum_arr[0],ynum_arr[0]);
+            for(var i=0;i<count-2;i++){
+                content1.lineTo(xnum_arr[i+1],ynum_arr[i+1]);
+            }
+            content1.closePath();
+            content1.stroke();
+        }
+        function change(){
+            for(var i=0;i<count-1;i++){
+                var tem1="xt"+(i+1);
+                var tem2="yt"+(i+1);
+                xnum_arr[i]=document.getElementById(tem1).value;
+                ynum_arr[i]=document.getElementById(tem2).value;
+            }
+            //这里计算
+            for(var i=0;i<count-2;i++){
+                resu=resu+xnum_arr[i]*ynum_arr[i+1];
+                resu=resu-xnum_arr[i+1]*ynum_arr[i];
+            }
+            resu=resu+xnum_arr[count-2]*ynum_arr[0];
+            resu=resu-xnum_arr[0]*ynum_arr[count-2];
+            resu=Math.abs(resu)/2; 
+
+            var delx=document.getElementById('delx');
+            var dely=document.getElementById('dely');
+            delx.parentNode.removeChild(delx);
+            dely.parentNode.removeChild(dely);
+            var div1=document.getElementById('parture');
+            var div2=document.getElementById('parture1');
+            div2.style.height=20+"px";
+            div1.style.height=0+"px";
+            div1.innerHTML='';
+            div2.innerHTML='';
+            setTimeout("showresult()",1000);
+        }
+    </script>
+</head>
+<body>
+    <div class="card-container">
+        <div class="image-wrapper">
+            <img src="images/山.jpg">
+        </div>
+        <div class="title-wrapper" id="resapp">
+            <h1 class="title">Wordcloud Generator</h1>
+            <p class="subtitle">程天佑</p>
+            <hr>
+            <!-- <p class="subtitle1" id="delx">x</p><p class="subtitle2" id="dely">y</p> -->
+            <form name="form" method="post">
+                <div class="icon-btns" id="parture">
+                    
+                    <div class="OriginTDiv" id="OrgTDiv">
+                        <textarea name="OriginText" id="OrgT" cols="10" rows="10">to be filled</textarea>
+                    </div>
+                    
+                </div>
+                <input type="hidden" name="hid" value="1" id="hid">
+                <div class="btns" id="parture1">
+                    <div class="cnfg">
+                        <input type="submit" name="Submit" value="Enter" class="cnfg1" onclick="change()"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
