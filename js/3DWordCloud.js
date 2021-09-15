@@ -35,7 +35,13 @@ function main() {
 
     lasta = a;
     lastb = b;
-
+    if(a<0.1){
+        lasta=1;
+        lastb=1;
+        a = lasta * 0.98;
+        b = lastb * 0.98;
+    }
+    // console.log(a);  
     if (Math.abs(a) <= 0.01 && Math.abs(b) <= 0.01) {
         return;
     }
@@ -170,7 +176,21 @@ function change() {
 
     // from server or get file form local
     let data = { "Python": 69.153, "Java": 59.546, "JavaScript": 40.135, "C++": 32.78, "C#": 19.546, "others": 12.6 };
-
+    data={
+    "曰": 87,
+    "之": 78,
+    "不": 67,
+    "人": 51,
+    "军": 49,
+    "兵": 46,
+    "大": 41,
+    "一": 40,
+    "马": 39,
+    "将": 37,
+    "来": 32,
+    "、": 30,
+    "有": 29,
+    "操": 28}
     var items = [];
     $.each(data, function (key, val) {
         items.push("<a href=#  style=font-size:" + val + "px>" + key + "</a>");
